@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.ssantano.project"
+        minSdkVersion 24
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+
+    // AndroidX
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "androidx.core:core-ktx:$ktx_core_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$ktx_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$ktx_lifecycle"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // UI
+    implementation "com.google.android.material:material:$material_version"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Network
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    // Tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+}
