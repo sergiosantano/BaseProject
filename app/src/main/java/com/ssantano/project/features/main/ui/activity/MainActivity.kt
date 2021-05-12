@@ -1,8 +1,8 @@
 package com.ssantano.project.features.main.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
+import com.ssantano.project.R
+import com.ssantano.project.common.extensions.getColorCmpt
 import com.ssantano.project.common.ui.BaseActivity
 import com.ssantano.project.databinding.ActivityMainBinding
 
