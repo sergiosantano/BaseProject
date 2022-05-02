@@ -1,4 +1,4 @@
-package com.ssantano.project.data.datasource.local
+package com.ssantano.project.data.datasource.database
 
 import android.content.Context
 import androidx.room.Room

@@ -1,4 +1,4 @@
-package com.ssantano.project.common.extensions
+package com.ssantano.project.common.android.extensions
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.ssantano.project.common.extensions
+package com.ssantano.project.common.kotlin.extensions
 
 import java.util.*
 

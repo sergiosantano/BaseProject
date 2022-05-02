@@ -31,9 +31,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        dataBinding true
-    }
 }
 
 dependencies {
@@ -64,7 +61,8 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Koin
-    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Network
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
