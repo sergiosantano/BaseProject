@@ -6,12 +6,12 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    // Dispatchers
-    single { getAppDispatchers() }
+  // Dispatchers
+  single { getAppDispatchers() }
 
-    // Repositories
+  // Repositories
 }
 
 private fun getAppDispatchers(): AppDispatchers {
-    return AppDispatchers(Dispatchers.Main, Dispatchers.IO)
+  return AppDispatchers(Dispatchers.Main, Dispatchers.IO)
 }

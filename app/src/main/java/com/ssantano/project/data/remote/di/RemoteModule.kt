@@ -11,15 +11,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val remoteModule = module {
 
-    // Retrofit and OkHttp
-    single { getRetrofitProvider(get(), get()) }
-    single { getOkHttpClient(get()) }
-    single { getInterceptor() }
-    single { getGsonProvider() }
+  // Retrofit and OkHttp
+  single { getRetrofitProvider(get(), get()) }
+  single { getOkHttpClient(get()) }
+  single { getInterceptor() }
+  single { getGsonProvider() }
 
-    /// WebServices
+  /// WebServices
 
-    // DataSources
+  // DataSources
 
 }
 
@@ -27,27 +27,27 @@ private val BASE_URL = "http:://www.your_api_url.com/"
 private val DATE_FORMAT = ""
 
 private fun getInterceptor(): Interceptor {
-    return HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.HEADERS
-    }
+  return HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.HEADERS
+  }
 }
 
 private fun getOkHttpClient(interceptor: Interceptor): OkHttpClient {
-    return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
+  return OkHttpClient.Builder()
+    .addInterceptor(interceptor)
+    .build()
 }
 
 private fun getGsonProvider(): Gson {
-    return GsonBuilder()
-            .setDateFormat(DATE_FORMAT)
-            .create()
+  return GsonBuilder()
+    .setDateFormat(DATE_FORMAT)
+    .create()
 }
 
 private fun getRetrofitProvider(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
-    return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+  return Retrofit.Builder()
+    .client(okHttpClient)
+    .baseUrl(BASE_URL)
+    .addConverterFactory(GsonConverterFactory.create(gson))
+    .build()
 }

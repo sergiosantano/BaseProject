@@ -6,11 +6,11 @@ import org.koin.dsl.module
 
 val localModule = module {
 
-    // Database
-    single { AppDataBase.buildDatabase(androidApplication()) }
+  // Database
+  single { AppDataBase.buildDatabase(androidApplication()) }
 
-    // DAO
+  // DAO
 
-    // DataSources
+  // DataSources
 
 }

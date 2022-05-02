@@ -7,15 +7,15 @@ import androidx.room.RoomDatabase
 abstract class AppDataBase : RoomDatabase() {
 
 
-    companion object {
-        private const val DATABASE_NAME = "AppRoomDatabase.db"
+  companion object {
+    private const val DATABASE_NAME = "AppRoomDatabase.db"
 
-        fun buildDatabase(applicationContext: Context) =
-                Room.databaseBuilder(
-                        applicationContext,
-                        AppDataBase::class.java,
-                        DATABASE_NAME
-                ).build()
-    }
+    fun buildDatabase(applicationContext: Context) =
+      Room.databaseBuilder(
+        applicationContext,
+        AppDataBase::class.java,
+        DATABASE_NAME
+      ).build()
+  }
 
 }
