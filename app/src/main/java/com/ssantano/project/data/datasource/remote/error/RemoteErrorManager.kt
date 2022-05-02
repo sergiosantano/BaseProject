@@ -1,8 +1,8 @@
-package com.ssantano.project.data.remote.error
+package com.ssantano.project.data.datasource.remote.error
 
 import com.google.gson.JsonParseException
-import com.ssantano.project.data.model.error.AsyncError
-import com.ssantano.project.data.model.error.KoreException
+import com.ssantano.project.domain.model.error.AsyncError
+import com.ssantano.project.domain.model.error.KoreException
 import retrofit2.HttpException
 import java.net.UnknownHostException
 import java.util.logging.Level
@@ -33,7 +33,7 @@ object RemoteErrorManager {
 
   private fun processRetrofitError(httpException: HttpException): AsyncError {
     val errorCode = httpException.code()
-    val url = httpException.response()?.raw()?.request?.url?.toString() ?: ""
+    val url = httpException.response()?.raw()?.request?.url?.toString().orEmpty()
     return AsyncError.ServerError(errorCode, url)
   }
 }

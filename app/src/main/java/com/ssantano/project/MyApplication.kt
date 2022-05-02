@@ -1,8 +1,8 @@
 package com.ssantano.project
 
 import android.app.Application
-import com.ssantano.project.data.local.di.localModule
-import com.ssantano.project.data.remote.di.remoteModule
+import com.ssantano.project.data.datasource.local.di.localModule
+import com.ssantano.project.data.datasource.remote.di.remoteModule
 import com.ssantano.project.data.repository.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties

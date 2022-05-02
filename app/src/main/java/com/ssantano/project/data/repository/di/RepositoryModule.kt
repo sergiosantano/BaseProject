@@ -1,6 +1,6 @@
 package com.ssantano.project.data.repository.di
 
-import com.ssantano.project.data.repository.util.AppDispatchers
+import com.ssantano.project.domain.AppDispatchers
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 

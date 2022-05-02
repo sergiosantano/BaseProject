@@ -1,6 +1,6 @@
-package com.ssantano.project.data.local.di
+package com.ssantano.project.data.datasource.local.di
 
-import com.ssantano.project.data.local.AppDataBase
+import com.ssantano.project.data.datasource.local.AppDataBase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

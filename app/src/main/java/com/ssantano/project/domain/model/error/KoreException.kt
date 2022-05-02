@@ -1,4 +1,4 @@
-package com.ssantano.project.data.model.error
+package com.ssantano.project.domain.model.error
 
 class KoreException(val asyncError: AsyncError) : Exception() {
 

@@ -1,4 +1,4 @@
-package com.ssantano.project.data.remote.di
+package com.ssantano.project.data.datasource.remote.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

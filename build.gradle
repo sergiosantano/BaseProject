@@ -10,6 +10,7 @@ buildscript {
         ktx_core_version = "1.7.0"
         ktx_lifecycle = "2.4.1"
         room_version = "2.4.2"
+        nav_version = "2.4.2"
 
         material_version = "1.5.0"
 

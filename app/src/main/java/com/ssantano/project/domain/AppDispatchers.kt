@@ -1,4 +1,4 @@
-package com.ssantano.project.data.repository.util
+package com.ssantano.project.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 
