@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkModule {
 
   companion object {
-    private val BASE_URL = "http:://www.your_api_url.com/"
+    private const val BASE_URL = "http:://www.your_api_url.com/"
   }
 
   @Provides

@@ -1,7 +1,6 @@
 package com.ssantano.project.data.datasource.database.di
 
 import android.app.Application
-import android.content.Context
 import com.ssantano.project.data.datasource.database.AppDataBase
 import dagger.Module
 import dagger.Provides

@@ -16,5 +16,4 @@ import dagger.Component
     UseCaseModule::class
   ]
 )
-interface ApplicationComponent: FragmentComponent, WidgetComponent {
-}
+interface ApplicationComponent: FragmentComponent, WidgetComponent
