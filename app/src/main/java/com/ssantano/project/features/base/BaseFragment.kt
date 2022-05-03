@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.ssantano.project.MyApplication
-import com.ssantano.project.di.components.ApplicationComponent
 
 abstract class BaseFragment : Fragment() {
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    (requireContext() as? MyApplication)?.appComponent?.let { initDagger(it) }
+    initDagger()
   }
 
   override fun onCreateView(
@@ -29,14 +27,17 @@ abstract class BaseFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initViews()
+    initViewModel()
   }
 
   @LayoutRes
   abstract fun getLayoutResId(): Int
 
-  abstract fun initDagger(appComponent: ApplicationComponent)
+  abstract fun initDagger()
 
   abstract fun bindViews(view: View)
 
   abstract fun initViews()
+
+  abstract fun initViewModel()
 }

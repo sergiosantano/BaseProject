@@ -1,11 +1,14 @@
 package com.ssantano.project
 
-import android.app.Application
-import com.ssantano.project.di.components.ApplicationComponent
 import com.ssantano.project.di.components.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class MyApplication : Application() {
+class MyApplication : DaggerApplication() {
 
-  val appComponent: ApplicationComponent = DaggerApplicationComponent.create()
+  override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+    return DaggerApplicationComponent.factory().create(applicationContext)
+  }
+
 
 }

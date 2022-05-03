@@ -2,6 +2,8 @@ package com.ssantano.project.data.datasource.remote.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.ssantano.project.data.datasource.remote.home.HomeRemoteDataSource
+import com.ssantano.project.data.repository.home.HomeDataSource
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
