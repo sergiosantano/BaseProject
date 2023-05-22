@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace "com.ssantano.project"
+    compileSdkVersion(BuildConfig.compileSdkVersion)
+
+    defaultConfig {
+        applicationId = BuildConfig.appId
+        minSdkVersion(BuildConfig.minSdkVersion)
+        targetSdkVersion(BuildConfig.targetSdkVersion)
+        versionCode = BuildConfig.versionCode
+        versionName = BuildConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    // Kotlin
+    implementation(Deps.coroutinesAndroid)
+    implementation(Deps.coroutinesCore)
+
+    // AndroidX
+    implementation(Deps.appCompat)
+    implementation(Deps.constraintLayout)
+    implementation(Deps.ktxCore)
+    implementation(Deps.ktxLifecycle)
+    implementation(Deps.ktxViewmodel)
+    implementation(Deps.ktxRoom)
+    implementation(Deps.roomRuntime)
+    annotationProcessor(Deps.roomCompiler)
+    kapt(Deps.roomCompiler)
+    implementation(Deps.navigation)
+    implementation(Deps.ktxNavigation)
+    implementation(Deps.splashScreen)
+
+    // UI
+    implementation(Deps.material)
+
+    // Glide
+    implementation(Deps.glide)
+    kapt(Deps.glideCompiler)
+
+    // Koin
+    implementation(Deps.koin)
+
+    // Network
+    implementation(Deps.okHttp)
+    implementation(Deps.retrofit)
+    implementation(Deps.retrofitMoshiConverter)
+    implementation(Deps.moshi)
+    kapt(Deps.moshiCodegen)
+
+    // Tests
+    testImplementation(Deps.junit)
+    testImplementation(Deps.testCoroutine)
+    androidTestImplementation(Deps.junitExtensions)
+    androidTestImplementation(Deps.espresso)
+
+}
