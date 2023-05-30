@@ -1,38 +1,59 @@
 package com.ssantano.project.features.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssantano.project.common.android.ui.viewmodel.BaseViewModel
+import com.ssantano.project.common.android.ui.viewmodel.EventEmitter
+import com.ssantano.project.common.android.ui.viewmodel.EventEmitterImpl
+import com.ssantano.project.common.android.ui.viewmodel.StateHolder
+import com.ssantano.project.common.android.ui.viewmodel.StateHolderImpl
+import com.ssantano.project.common.android.ui.viewmodel.UiState
 import com.ssantano.project.domain.model.home.HomeBO
-import com.ssantano.project.domain.model.response.AsyncResult
-import com.ssantano.project.domain.model.response.loadingAsyncResult
-import com.ssantano.project.domain.usecases.home.GetHomeDataListUC
+import com.ssantano.project.domain.model.response.Result
+import com.ssantano.project.domain.usecases.home.GetHomeDataListFlowUC
 import com.ssantano.project.navigation.NavigationCommand
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+data class HomeUiState(
+  override val isLoading: Boolean = false,
+  val data: List<HomeBO> = emptyList()
+) : UiState()
+
+sealed interface HomeUiEvent {
+  class ShowError(val message: String) : HomeUiEvent
+  object LaunchSampleDialog : HomeUiEvent
+}
+
 class HomeViewModel(
-  private val getHomeDataListUC: GetHomeDataListUC
-) : BaseViewModel() {
+  private val getHomeDataListFlowUC: GetHomeDataListFlowUC
+) : BaseViewModel(),
+  StateHolder<HomeUiState> by StateHolderImpl(HomeUiState()),
+  EventEmitter<HomeUiEvent> by EventEmitterImpl() {
 
-  private val mainDataLiveData = MutableLiveData<AsyncResult<List<HomeBO>>>()
+  fun requestDataStateFlow() {
+    viewModelScope.launch {
+      setState { it.copy(isLoading = true) }
+      delay(5000)
 
-  fun mainDataLD() = mainDataLiveData as LiveData<AsyncResult<List<HomeBO>>>
-
-
-  fun requestData() {
-    viewModelScope.launch(Dispatchers.IO) {
-      mainDataLiveData.postValue(loadingAsyncResult())
-      val result = getHomeDataListUC()
-      delay(10000)
-      mainDataLiveData.postValue(result)
+      getHomeDataListFlowUC().collect { result ->
+        when (result) {
+          is Result.Error -> throwError(result.value.debugMessage)
+          is Result.Success -> setState { it.copy(isLoading = false, data = result.value) }
+        }
+      }
     }
   }
 
-  fun navigateToSecondFragment() {
-    viewModelScope.launch { navigate(HomeFragmentDirections.toSecondFragment()) }
+  fun showSampleDialog() {
+    viewModelScope.launch { sendEvent(HomeUiEvent.LaunchSampleDialog) }
   }
 
+  fun navigateToSecondFragment() {
+    viewModelScope.launch { navigate(NavigationCommand.To(HomeFragmentDirections.toSecondFragment())) }
+  }
+
+  private suspend fun throwError(message: String) {
+    sendEvent(HomeUiEvent.ShowError(message))
+    setState { it.copy(isLoading = false) }
+  }
 }

@@ -1,9 +1,9 @@
 package com.ssantano.project.domain.usecases.di
 
-import com.ssantano.project.domain.usecases.home.GetHomeDataListUC
-import com.ssantano.project.domain.usecases.home.GetHomeDataListUCImpl
+import com.ssantano.project.domain.usecases.home.GetHomeDataListFlowUC
+import com.ssantano.project.domain.usecases.home.GetHomeDataListFlowUCImpl
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    single<GetHomeDataListUC> { GetHomeDataListUCImpl(get()) }
+    single<GetHomeDataListFlowUC> { GetHomeDataListFlowUCImpl(get()) }
 }

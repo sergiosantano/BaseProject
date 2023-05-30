@@ -1,53 +1,52 @@
 package com.ssantano.project.domain.model.response.repository
 
-import com.ssantano.project.domain.model.response.AsyncResult
+import com.ssantano.project.domain.model.response.Result
 import com.ssantano.project.domain.model.response.error.AsyncError
 import com.ssantano.project.domain.model.response.error.KoreException
+import com.ssantano.project.domain.model.response.toError
+import com.ssantano.project.domain.model.response.toSuccess
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
 abstract class CacheableRemoteResponse<ResultType> {
 
-  private var flow: Flow<AsyncResult<ResultType>>? = null
+  private var flow: Flow<Result<AsyncError, ResultType>>? = null
 
   private val response = object : RepositoryResponse<ResultType> {
-    override suspend fun flow(): Flow<AsyncResult<ResultType>> = executeFlow()
-    override suspend fun value(): AsyncResult<ResultType> = executeBase { }
+    override suspend fun flow(): Flow<Result<AsyncError, ResultType>> = executeFlow()
+    override suspend fun value(): Result<AsyncError, ResultType> = executeBase { }
   }
 
   fun build(): RepositoryResponse<ResultType> = response
 
-  private fun executeFlow(): Flow<AsyncResult<ResultType>> {
+  private fun executeFlow(): Flow<Result<AsyncError, ResultType>> {
     return flow ?: flow {
       executeBase { emit(it) }
     }.apply { flow = this }
   }
 
-  private suspend fun executeBase(emit: suspend (AsyncResult<ResultType>) -> Unit): AsyncResult<ResultType> {
-    emit(AsyncResult.Loading(null))
-
+  private suspend fun executeBase(emit: suspend (Result<AsyncError, ResultType>) -> Unit): Result<AsyncError, ResultType> {
     val cachedResult = try {
       loadFromLocal()
     } catch (e: Exception) {
       null
     }
 
-    val finalValue: AsyncResult<ResultType> =
+    val finalValue: Result<AsyncError, ResultType> =
       if (cachedResult == null || shouldRequestFromRemote(cachedResult)) {
         try {
-          emit(AsyncResult.Loading(cachedResult))
           val networkResponse = requestRemoteCall()
           saveRemoteResponse(networkResponse)
-          AsyncResult.Success(networkResponse)
+          networkResponse.toSuccess()
         } catch (e: Exception) {
           val asyncError = (e as? KoreException)?.asyncError
             ?: AsyncError.UnknownError("An error happened", e)
           onRemoteError(asyncError)
-          AsyncResult.Error(asyncError, cachedResult)
+          asyncError.toError()
         }
       } else {
-        AsyncResult.Success(cachedResult)
+        cachedResult.toSuccess()
       }
     emit(finalValue)
     return finalValue
