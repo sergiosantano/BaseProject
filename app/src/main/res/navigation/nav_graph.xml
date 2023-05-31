@@ -8,6 +8,15 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ssantano.project.features.home.HomeFragment"
-        tools:layout="@layout/fragment__home"/>
+        tools:layout="@layout/fragment__home">
+        <action
+            android:id="@+id/to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.ssantano.project.features.home.SecondFragment"
+        tools:layout="@layout/fragment__second" />
 
 </navigation>

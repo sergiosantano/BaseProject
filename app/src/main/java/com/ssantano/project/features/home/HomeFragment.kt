@@ -60,6 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), LoadingBehaviour {
       val dialog = DefaultBottomDialog.newInstance("Ejemplo de descripcion", "CANCELAR")
       dialog.show(childFragmentManager, "DialogTag")
     }
+
+    binding.homeButtonNavSample.setOnClickListener { viewModel.navigateToSecondFragment() }
   }
 
   override fun initViewModel() {
