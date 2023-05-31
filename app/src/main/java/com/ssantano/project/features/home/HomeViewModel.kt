@@ -8,6 +8,7 @@ import com.ssantano.project.domain.model.home.HomeBO
 import com.ssantano.project.domain.model.response.AsyncResult
 import com.ssantano.project.domain.model.response.loadingAsyncResult
 import com.ssantano.project.domain.usecases.home.GetHomeDataListUC
+import com.ssantano.project.navigation.NavigationCommand
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,6 +29,10 @@ class HomeViewModel(
       delay(10000)
       mainDataLiveData.postValue(result)
     }
+  }
+
+  fun navigateToSecondFragment() {
+    viewModelScope.launch { navigate(HomeFragmentDirections.toSecondFragment()) }
   }
 
 }
