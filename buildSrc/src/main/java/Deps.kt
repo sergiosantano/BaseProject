@@ -16,6 +16,7 @@ object Deps {
     val ktxRoom = "androidx.room:room-ktx:${Versions.room}"
     val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    val navigationClasspath = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     val navigation = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     val ktxNavigation = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
