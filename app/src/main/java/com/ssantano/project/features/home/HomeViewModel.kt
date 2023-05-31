@@ -32,7 +32,7 @@ class HomeViewModel(
   }
 
   fun navigateToSecondFragment() {
-    viewModelScope.launch { navigate(NavigationCommand.To(HomeFragmentDirections.toSecondFragment())) }
+    viewModelScope.launch { navigate(HomeFragmentDirections.toSecondFragment()) }
   }
 
 }
